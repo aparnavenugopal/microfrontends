@@ -6,14 +6,17 @@ import App from './App';
 
 
 //creation of munt function
-const mount = (el, { onNavigate, defaultHistory }) => {
-    const history = defaultHistory || createMemoryHistory();
+const mount = (el, { 
+    onSignIn ,onNavigate, defaultHistory, initialPath }) => {
+    const history = defaultHistory || createMemoryHistory({
+        initialEntries: ['initialPath']
+    });
     if(onNavigate){
       history.listen(onNavigate);
     }
    
     ReactDOM.render(
-        <App history={history}/>,el
+        <App onSignIn={onSignIn} history={history}/>,el
     );
 
     return {
